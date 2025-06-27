@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import DoctorProfile from './pages/DoctorProfile'
 import PatientProfile from './pages/PatientProfile'
 import NotFound from './pages/NotFound'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
  
@@ -18,8 +19,16 @@ function App() {
      <Routes>
       <Route path='/' element={<Signup/>}/>
       <Route path='/login' element={<Login/>}/>
-      <Route path='/doctorProfile/:docorId' element={<DoctorProfile/>}/>
-      <Route path='/patientProfile/:patientId' element={<PatientProfile/>}/>
+      <Route path='/doctorProfile' element={
+        <ProtectedRoute>
+          <DoctorProfile/>
+        </ProtectedRoute>
+        }/>
+      <Route path='/patientProfile' element={
+        <ProtectedRoute>
+        <PatientProfile/>
+        </ProtectedRoute>
+        }/>
       <Route path='/*' element={<NotFound/>}/>
       
    

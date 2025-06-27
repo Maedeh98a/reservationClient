@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 
 function DoctorProfile() {
+  const {currentUser, isLoading, isLoggedIn,handleLogout } = useContext(AuthContext);
+  
   return (
-    <div>DoctorProfile</div>
+    <div>DoctorProfile
+      <button onClick={handleLogout}>Logout</button>
+    </div>
   )
 }
 
