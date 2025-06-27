@@ -7,9 +7,11 @@ const AuthContext = createContext();
 
 const AuthContextWrapper = ({children})=>{
     const nav = useNavigate();
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [doctorId, setDoctorId] = useState(null);
+    // const [patientId, setPatientId] = useState(null);
 
     async function authenticateUser(){
         try {
@@ -20,18 +22,24 @@ const AuthContextWrapper = ({children})=>{
                     authorization:`Bearer ${tokenInLocalStorage}`
                 }}
             );
-            
-            setCurrentUser(response.data.payload);
+            const payload = response.data.payload;
+          
+            setCurrentUser(payload);
             setIsLoading(false);
             setIsLoggedIn(true);
-            
+            // if(payload.role == "doctor"){
+            //     setDoctorId(payload.doctorId);
+            // }
+            // if(payload.role == "patient"){
+            //     setPatientId(payload.patientId);
+            // }
         } catch (error) {
             console.error(error);
             setCurrentUser(null);
             setIsLoading(false);
-            setIsLoggedIn(false);
+            setIsLoggedIn(false);            
         }
-
+       
 
     }
     function handleLogout(){
@@ -43,7 +51,14 @@ const AuthContextWrapper = ({children})=>{
 
     },[])
     return (
-        <AuthContext.Provider value={{currentUser, isLoading, isLoggedIn, authenticateUser, handleLogout}}>
+        <AuthContext.Provider value={{
+            currentUser,
+            isLoading,
+            isLoggedIn,
+            authenticateUser,
+            handleLogout,
+            setCurrentUser
+            }}>
             {children}
         </AuthContext.Provider>
     )

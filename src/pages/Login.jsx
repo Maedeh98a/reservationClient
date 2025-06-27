@@ -9,7 +9,8 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {authenticateUser} = useContext(AuthContext)
-
+  // const {doctorId, setDoctorId} = useContext(AuthContext)
+  // const {patientId,setPatientId} = useContext(AuthContext)
   const nav = useNavigate();
   async function handleLoginUser(event){
     event.preventDefault();
@@ -18,16 +19,18 @@ function Login() {
       const res = await axios.post("http://localhost:5005/auth/login", userToLogin);
       localStorage.setItem("authToken", res.data.authToken);
       const decode = jwtDecode(res.data.authToken);
-      console.log(decode.role)
+      console.log(decode)
       await authenticateUser();
+      
       if(decode.role == 'doctor'){
-        nav("/doctorProfile");
+       // setDoctorId(decode.doctorId)
+        nav(`/doctorProfile`);
+  
       }
       else if(decode.role == 'patient'){
-        nav("/patientProfile");
+        // setPatientId(decode.patientId);
+        nav(`/patientProfile`);
       }
-      
-
       // I have to figure out for user profile is it doctor or patient
     
     } catch (error) {
