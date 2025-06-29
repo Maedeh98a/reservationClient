@@ -10,8 +10,8 @@ const AuthContextWrapper = ({children})=>{
     const [currentUser, setCurrentUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const [doctorId, setDoctorId] = useState(null);
-    // const [patientId, setPatientId] = useState(null);
+    const [doctorId, setDoctorId] = useState(null);
+    const [patientId, setPatientId] = useState(null);
 
     async function authenticateUser(){
         try {
@@ -27,12 +27,12 @@ const AuthContextWrapper = ({children})=>{
             setCurrentUser(payload);
             setIsLoading(false);
             setIsLoggedIn(true);
-            // if(payload.role == "doctor"){
-            //     setDoctorId(payload.doctorId);
-            // }
-            // if(payload.role == "patient"){
-            //     setPatientId(payload.patientId);
-            // }
+            if(payload.role == "doctor"){
+                setDoctorId(payload.doctorId);
+            }
+            if(payload.role == "patient"){
+                setPatientId(payload.patientId);
+            }
         } catch (error) {
             console.error(error);
             setCurrentUser(null);
@@ -57,7 +57,9 @@ const AuthContextWrapper = ({children})=>{
             isLoggedIn,
             authenticateUser,
             handleLogout,
-            setCurrentUser
+            setCurrentUser,
+            doctorId, 
+            patientId,
             }}>
             {children}
         </AuthContext.Provider>

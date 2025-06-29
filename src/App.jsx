@@ -13,9 +13,7 @@ function App() {
 
   return (
     <>
-     <nav>
-      <h2>Our fullstack project</h2>
-     </nav>
+    
      <Routes>
       <Route path='/' element={<Signup/>}/>
       <Route path='/login' element={<Login/>}/>
