@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import TimeSlot from '../components/TimeSlot';
 import CreateDoctorProfile from './CreateDoctorProfile';
+import UpdateDoctorProfile from './UpdateDoctorProfile';
 
 function DoctorProfile() {
   const {currentUser, setCurrentUser, isLoading, isLoggedIn,handleLogout, doctorId } = useContext(AuthContext);
@@ -67,9 +68,9 @@ useEffect(()=>{
 
 <div>{doctorId != undefined ? getDoctorProfile(doctorId) : <CreateDoctorProfile/>}</div>
     <p>{currentUser.firstName}</p>
-    <h3>{doctorInfo._id}</h3>
+    <h3>{doctorInfo.specialty}</h3>
     <div>
-      {doctorId != undefined ? <TimeSlot/> : "you should create your profile"}
+      {doctorId != undefined ? <TimeSlot availabilities={availabilities} setAvailabilities={setAvailabilities}/> : "you should create your profile"}
       <div>
   {availabilities.map((item) => (
     <div key={item._id}>
@@ -79,6 +80,9 @@ useEffect(()=>{
   ))}
 </div>
       <div/>
+      <section>
+        <UpdateDoctorProfile doctorInfo={doctorInfo} setDoctorInfo={setDoctorInfo}/>
+      </section>
       <button onClick={handleLogout}>Logout</button>
     </div>
 

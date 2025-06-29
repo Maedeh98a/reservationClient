@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../context/AuthContext';
 
 
-function TimeSlot() {
+function TimeSlot({availabilities, setAvailabilities}) {
     const [date, setDate] = useState(new Date());
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
@@ -25,6 +25,8 @@ function TimeSlot() {
             headers:
              {Authorization:`Bearer ${token}`}
         });
+        const newAvailability = res.data;
+        setAvailabilities((prev) => [...prev, newAvailability].sort((a, b)=> new Date(a.date) - new Date(b.date)));
         console.log("Availability created:", res.data);
 
             
