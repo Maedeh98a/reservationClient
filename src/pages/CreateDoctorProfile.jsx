@@ -3,7 +3,7 @@ import axios
  from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import TimeSlot from '../components/TimeSlot';
-function CreateDoctorProfile() {
+function CreateDoctorProfile({setDoctorInfo}) {
     const {currentUser} = useContext(AuthContext);
     const [specialty, setSpecialty] = useState("");
     const[startedYear, setStartedYear] = useState(1930);
@@ -24,6 +24,7 @@ async function doctorInfoHandle(event) {
       } 
     })
     console.log("doctor created", doctorInfo.data)
+    setDoctorInfo(doctorInfo);
   } catch (error) {
     console.log(error)
   }

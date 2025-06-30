@@ -7,11 +7,14 @@ import { useState } from 'react';
 import TimeSlot from '../components/TimeSlot';
 import CreateDoctorProfile from './CreateDoctorProfile';
 import UpdateDoctorProfile from './UpdateDoctorProfile';
+import UpdateTimeSlot from '../components/UpdateTimeSlot';
+import DeleteTimeSlot from '../components/DeleteTimeSlot';
 
 function DoctorProfile() {
-  const {currentUser, setCurrentUser, isLoading, isLoggedIn,handleLogout, doctorId } = useContext(AuthContext);
+  const {currentUser, setCurrentUser,handleLogout, doctorId } = useContext(AuthContext);
   const [doctorInfo, setDoctorInfo] = useState([]);
   const [availabilities, setAvailabilities] = useState([]);
+  const [editingId, setEditingId] = useState(null);
 
 
 useEffect(()=>{
@@ -26,9 +29,10 @@ useEffect(()=>{
 
 },[currentUser._id])
 
+// check this part
 useEffect(()=>{
   const token = localStorage.getItem("authToken")
-  axios.get(`http://localhost:5005/profile/availability/${doctorId}`,{
+  axios.get(`http://localhost:5005/timeslot/availability/${doctorId}`,{
     headers:{
       Authorization:`Bearer ${token}`
     }
@@ -57,34 +61,94 @@ useEffect(()=>{
   })
 
 },[doctorId])
-
-
   }
 
+function handleDelete(itemId){
+  const token = localStorage.getItem('authToken')
+  axios.delete(`http://localhost:5005/timeslot/deleteTimeslot/${itemId}`, {headers:{
+    Authorization: `Bearer ${token}`
 
+  }})
+  .then((res)=>{
+   console.log(res.data);
+   setAvailabilities(prev => prev.filter(item => item._id !== itemId))
+
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+}
   return (
 <>
 
+<section className='doctor-profile'>
+  <article className='doctor-style'>
 
-<div>{doctorId != undefined ? getDoctorProfile(doctorId) : <CreateDoctorProfile/>}</div>
-    <p>{currentUser.firstName}</p>
-    <h3>{doctorInfo.specialty}</h3>
     <div>
+      {doctorId != undefined ? getDoctorProfile(doctorId) : <CreateDoctorProfile  setDoctorInfo={setDoctorInfo}/>}
+    <h2>Mr {currentUser.firstName} {currentUser.lastName}</h2>
+    <h4>email : {currentUser.email}</h4>
+    <h4>specialty: {doctorInfo.specialty}</h4>
+    <h4>started Year: {doctorInfo.startedYear}</h4>
+   
+      </div>
+      <div>
+        <h4>You can change your profile here:</h4>
+        
+          <UpdateDoctorProfile doctorInfo={doctorInfo} setDoctorInfo={setDoctorInfo}/>
+      </div>
+        
+     
+  </article>
+  <article className='timeslot-style'>
+
+    
       {doctorId != undefined ? <TimeSlot availabilities={availabilities} setAvailabilities={setAvailabilities}/> : "you should create your profile"}
       <div>
   {availabilities.map((item) => (
-    <div key={item._id}>
-      <h3>{new Date(item.date).toLocaleDateString()}</h3>
-      <p>{item.start} - {item.end}</p>
+    <div key={item._id} className='timeslot-table'>
+      <table>
+        <thead>
+          <tr>
+          <th>date</th>
+        <th>weekday</th>
+        <th>time</th>
+        <th>booked</th>
+        <th>patient</th>
+        <th>edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                    <td>
+        {new Date(item.date).toLocaleDateString()}
+        </td>
+        <td>
+     {new Date(item.date).toLocaleDateString('en-US', {weekday: 'long'})}
+        </td>
+        <td>
+        <p>{item.start} - {item.end}</p>
+        </td>
+        <td>{item.isBooked?"yes":"no"}</td>
+        <td>{item.patient}</td>
+        <td>
+          <button onClick={()=> handleDelete(item._id)}>delete</button>
+          <button onClick={()=> setEditingId(item._id)}>update</button>
+          {editingId == item._id && <UpdateTimeSlot timeslot={item} setAvailabilities={setAvailabilities}/>}
+        
+        </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
     </div>
   ))}
 </div>
-      <div/>
-      <section>
-        <UpdateDoctorProfile doctorInfo={doctorInfo} setDoctorInfo={setDoctorInfo}/>
-      </section>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+  </article>
+    
+</section>
+
 
     
 </>

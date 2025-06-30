@@ -16,7 +16,7 @@ function TimeSlot({availabilities, setAvailabilities}) {
         event.preventDefault();
         const token = localStorage.getItem("authToken");
         try {
-            const res = await axios.post("http://localhost:5005/profile/availability", {
+            const res = await axios.post("http://localhost:5005/timeslot/availability", {
                 date: date.toISOString().split('T')[0],
                 start, 
                 end
@@ -35,18 +35,18 @@ function TimeSlot({availabilities, setAvailabilities}) {
         }
     }
   return (
-   <form onSubmit={handleSubmit}>
+   <form onSubmit={handleSubmit} className='form-style'>
     <h2>Availability</h2>
     <label> select Date
         <DatePicker selected={date} onChange={(d)=> setDate(d)}/>
     </label>
     <label>select start
-        <input type='text' onChange={(event) => setStart(event.target.value)} />
+        <input type='time' onChange={(event) => setStart(event.target.value)} />
     </label>
     <label>select end
-        <input type='text' onChange={(event) => setEnd(event.target.value)} />
+        <input type='time' onChange={(event) => setEnd(event.target.value)} />
     </label>
-    <button type='submit'>Add time slot</button>
+    <button id='timeslot-btn' type='submit'>Add time slot</button>
 
    </form>
   )

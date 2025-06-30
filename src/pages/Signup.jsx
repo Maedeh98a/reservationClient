@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Signup() {
   const [firstName, setFirstName] = useState('')
@@ -25,8 +25,13 @@ function Signup() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSignupUser}>
+    < >
+    
+   
+      <form onSubmit={handleSignupUser} className='signup-style'>
+        <p>
+          You can signup here as a patient or doctor and after login you complete your profile
+        </p>
         <label>
           Firstname:
           <input type='text' value={firstName} onChange={(event) => setFirstName(event.target.value)} />
@@ -49,11 +54,17 @@ function Signup() {
         </label>
         <label>
           Your role:
-          <input type='text' value={role} onChange={(event) => setRole(event.target.value)} />
+          <select value={role} onChange={(event) => setRole(event.target.value)}>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
         </label>
-        <button>Sign up</button>
+        <button className='btn'>Sign up</button>
+        <p>you already have an account, so you can Login
+          <Link to="/login">login</Link>
+        </p>
       </form>
-    </div>
+    </>
   )
 }
 

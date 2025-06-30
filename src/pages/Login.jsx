@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import {jwtDecode} from 'jwt-decode';
 
@@ -41,14 +41,17 @@ function Login() {
   }
   return (
     <div>
-      <form onSubmit={handleLoginUser}>
+      <form onSubmit={handleLoginUser}className='login-style'>
         <label>email
           <input type='email' value={email} onChange={(event)=>setEmail(event.target.value)}/>
         </label>
         <label>password
           <input type='password' value={password} onChange={(event)=>setPassword(event.target.value)}/>
         </label>
-        <button>Login</button>
+        <button className="btn">Login</button>
+        <p>You don't have account, so at first create new account
+          <Link to="/">signup</Link>
+        </p>
       </form>
     </div>
   )

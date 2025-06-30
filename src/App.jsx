@@ -7,6 +7,8 @@ import DoctorProfile from './pages/DoctorProfile'
 import PatientProfile from './pages/PatientProfile'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
+import Navbar from './components/Navbar'
+import Footer from './components/footer'
 
 function App() {
  
@@ -14,8 +16,9 @@ function App() {
   return (
     <>
     
+    <Navbar/>
      <Routes>
-      <Route path='/' element={<Signup/>}/>
+      <Route path="/" element={<Signup/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/doctorProfile' element={
         <ProtectedRoute>
@@ -31,6 +34,7 @@ function App() {
       
    
      </Routes>
+     <Footer/>
     </>
   )
 }
