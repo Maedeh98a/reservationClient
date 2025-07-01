@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import {config} from "../../config.js";
 
-function UpdateDoctorProfile({doctorInfo, setDoctorInfo}) {
+function UpdateDoctorProfile({setDoctorInfo}) {
     const nav = useNavigate();
     const [specialty, setSpecialty] = useState('GP');
     const [startedYear, setStartedYear] = useState(1900);
+  
 
 
 
@@ -17,23 +19,25 @@ function handleUpdate(event){
         specialty: specialty,
         startedYear: startedYear
     }
-        axios.put("http://localhost:5005/profile/updateDoctor", updatedDoctor,{
+    
+        axios.put(config.apiUrl + "/profile/updateDoctor", updatedDoctor,{
             headers: {
                 Authorization: `Bearer ${token}`}
             })
             .then((res)=>{
-                setDoctorInfo(res.data)
+                setDoctorInfo(res.data);
                 console.log(res.data);
 
             })
             .catch((error)=>{
                 console.log(error);
             })
+        
         }
 
 function handleDelete(){
     const token = localStorage.getItem('authToken');
-    axios.delete("http://localhost:5005/profile/deleteDoctor",
+    axios.delete(config.apiUrl + "/profile/deleteDoctor",
         {headers:{
             Authorization: `Bearer ${token}`
         }}
@@ -50,6 +54,7 @@ function handleDelete(){
   return (
     <>
     <form onSubmit={handleUpdate} className='update-form'>
+        
         <label>
             specialty
             <input type='text' value={specialty} onChange={(event)=>setSpecialty(event.target.value)}/>
@@ -58,6 +63,8 @@ function handleDelete(){
             startedYear
             <input type="number" value={startedYear} onChange={(event)=> setStartedYear(event.target.value)}/>
         </label>
+       
+        
         <button id="update-btn" className='btn'>update</button>
 
     </form>

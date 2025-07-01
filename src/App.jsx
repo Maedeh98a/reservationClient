@@ -9,7 +9,8 @@ import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import Navbar from './components/Navbar'
 import Footer from './components/footer'
-
+import DoctorList from './pages/DoctorList'
+import DoctorDetails from './pages/DoctorDetails'
 function App() {
  
 
@@ -20,6 +21,8 @@ function App() {
      <Routes>
       <Route path="/" element={<Signup/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path='/doctors' element={<DoctorList/>}/>
+      <Route path = '/doctors/:doctorId' element= {<DoctorDetails/>}/>
       <Route path='/doctorProfile' element={
         <ProtectedRoute>
           <DoctorProfile/>

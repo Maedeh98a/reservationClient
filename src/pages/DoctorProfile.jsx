@@ -8,18 +8,17 @@ import TimeSlot from '../components/TimeSlot';
 import CreateDoctorProfile from './CreateDoctorProfile';
 import UpdateDoctorProfile from './UpdateDoctorProfile';
 import UpdateTimeSlot from '../components/UpdateTimeSlot';
-import DeleteTimeSlot from '../components/DeleteTimeSlot';
+import {config} from "../../config.js";
 
 function DoctorProfile() {
-  const {currentUser, setCurrentUser,handleLogout, doctorId } = useContext(AuthContext);
+  const {currentUser, setCurrentUser,handleLogout, doctorId, authenticateUser} = useContext(AuthContext);
   const [doctorInfo, setDoctorInfo] = useState([]);
   const [availabilities, setAvailabilities] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
-
 useEffect(()=>{
   const userId = currentUser._id;
-  axios.get(`http://localhost:5005/profile/${userId}`)
+  axios.get(config.apiUrl + `/profile/${userId}`)
   .then((res)=>{
     setCurrentUser(res.data);
   })
@@ -32,7 +31,7 @@ useEffect(()=>{
 // check this part
 useEffect(()=>{
   const token = localStorage.getItem("authToken")
-  axios.get(`http://localhost:5005/timeslot/availability/${doctorId}`,{
+  axios.get(config.apiUrl + `/timeslot/availability/${doctorId}`,{
     headers:{
       Authorization:`Bearer ${token}`
     }
@@ -48,10 +47,9 @@ useEffect(()=>{
 },[doctorId])
 
 
-
   function getDoctorProfile(doctorId){
     useEffect(()=>{
-  axios.get(`http://localhost:5005/profile/doctor/${doctorId}`)
+  axios.get(config.apiUrl + `/profile/doctor/${doctorId}`)
   .then((res)=>{
     setDoctorInfo(res.data)
    
@@ -65,7 +63,7 @@ useEffect(()=>{
 
 function handleDelete(itemId){
   const token = localStorage.getItem('authToken')
-  axios.delete(`http://localhost:5005/timeslot/deleteTimeslot/${itemId}`, {headers:{
+  axios.delete(config.apiUrl + `/timeslot/deleteTimeslot/${itemId}`, {headers:{
     Authorization: `Bearer ${token}`
 
   }})
@@ -85,17 +83,18 @@ function handleDelete(itemId){
   <article className='doctor-style'>
 
     <div>
-      {doctorId != undefined ? getDoctorProfile(doctorId) : <CreateDoctorProfile  setDoctorInfo={setDoctorInfo}/>}
+      {doctorId != undefined ? getDoctorProfile(doctorId) : <CreateDoctorProfile  setDoctorInfo={setDoctorInfo} authenticateUser={authenticateUser}/>}
     <h2>Mr {currentUser.firstName} {currentUser.lastName}</h2>
     <h4>email : {currentUser.email}</h4>
     <h4>specialty: {doctorInfo.specialty}</h4>
     <h4>started Year: {doctorInfo.startedYear}</h4>
+    <p>description: {currentUser.description}</p>
    
       </div>
       <div>
         <h4>You can change your profile here:</h4>
         
-          <UpdateDoctorProfile doctorInfo={doctorInfo} setDoctorInfo={setDoctorInfo}/>
+          <UpdateDoctorProfile setDoctorInfo={setDoctorInfo}/>
       </div>
         
      

@@ -3,6 +3,7 @@ import TimeSlot from './TimeSlot'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import {config} from "../../config.js";
 
 function UpdateTimeSlot({timeslot, setAvailabilities}) {
     const nav = useNavigate();
@@ -13,7 +14,7 @@ function UpdateTimeSlot({timeslot, setAvailabilities}) {
     function handleUpdate(event){
         event.preventDefault();
         const token = localStorage.getItem('authToken');
-        axios.put(`http://localhost:5005/timeslot/updateTimeslot/${timeslot._id}`, {
+        axios.put(config.apiUrl + `/timeslot/updateTimeslot/${timeslot._id}`, {
             date, start, end
         }, {headers:{
             Authorization: `Bearer ${token}`

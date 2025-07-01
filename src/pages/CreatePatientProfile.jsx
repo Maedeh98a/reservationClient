@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
+import {config} from "../../config.js";
 
 function CreatePatientProfile({setPatientInfo}) {
     const {currentUser} = useContext(AuthContext);
@@ -11,7 +12,7 @@ function CreatePatientProfile({setPatientInfo}) {
   try {
     const token = localStorage.getItem('authToken');
     console.log(token)
-    const patientInfo = await axios.post("http://localhost:5005/profile/createPatient", {
+    const patientInfo = await axios.post(config.apiUrl + "/profile/createPatient", {
       user: currentUser._id,
       dateOfBirth:dateOfBirth,
       history:history

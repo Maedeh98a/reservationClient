@@ -3,8 +3,12 @@ import axios
  from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import TimeSlot from '../components/TimeSlot';
-function CreateDoctorProfile({setDoctorInfo}) {
-    const {currentUser} = useContext(AuthContext);
+import {config} from "../../config.js";
+
+
+function CreateDoctorProfile({setDoctorInfo, authenticateUser}) {
+ 
+    const {currentUser, doctorId, setDoctorId} = useContext(AuthContext);
     const [specialty, setSpecialty] = useState("");
     const[startedYear, setStartedYear] = useState(1930);
     
@@ -13,7 +17,7 @@ async function doctorInfoHandle(event) {
   try {
     const token = localStorage.getItem('authToken');
     console.log(token)
-    const doctorInfo = await axios.post("http://localhost:5005/profile/createDoctor", {
+    const doctorInfo = await axios.post(config.apiUrl + "/profile/createDoctor", {
       user: currentUser._id,
       specialty: specialty,
       startedYear: startedYear
@@ -24,7 +28,7 @@ async function doctorInfoHandle(event) {
       } 
     })
     console.log("doctor created", doctorInfo.data)
-    setDoctorInfo(doctorInfo);
+    setDoctorInfo(doctorInfo.data);
   } catch (error) {
     console.log(error)
   }

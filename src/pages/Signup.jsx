@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { config } from '../../config';
 
 function Signup() {
   const [firstName, setFirstName] = useState('')
@@ -8,13 +9,13 @@ function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [description, setDescription] = useState('')
-  const [role, setRole] = useState('')
+  const [role, setRole] = useState('doctor')
   const nav = useNavigate();
 
   function handleSignupUser(event) {
     event.preventDefault()
     const userToCreate = { firstName, lastName, email, password, description, role }
-    axios.post('http://localhost:5005/auth/signup', userToCreate)
+    axios.post(config.apiUrl + '/auth/signup', userToCreate)
       .then((res) => {
         console.log('user successfully created', res.data)
         nav("/login")

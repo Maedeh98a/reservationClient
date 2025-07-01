@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import reserve from '../assets/reserve.png'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import {config} from "../../config.js";
 
 function Navbar() {
     const {currentUser, isLoggedIn, handleLogout} = useContext(AuthContext);
@@ -10,7 +11,7 @@ function Navbar() {
     <nav>
       <section className='common-nav'>
         <img id='logo-img' src={reserve} alt='logo'/>
-            <Link>Doctors</Link>
+            <Link to="/doctors">Doctors</Link>
             <Link>About us</Link>
       </section>
        <section className='user-nav'>

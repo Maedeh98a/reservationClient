@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import CreatePatientProfile from './CreatePatientProfile';
+import {config} from "../../config.js";
 
 function PatientProfile() {
   const {currentUser, setCurrentUser,handleLogout, patientId } = useContext(AuthContext);
@@ -13,7 +14,7 @@ console.log(currentUser)
 
 useEffect(()=>{
   const userId = currentUser._id;
-  axios.get(`http://localhost:5005/profile/${userId}`)
+  axios.get(config.apiUrl + `/profile/${userId}`)
   .then((res)=>{
     setCurrentUser(res.data);
   })
@@ -24,7 +25,7 @@ useEffect(()=>{
 },[currentUser._id])
 
 function getPatientInfo(patientId){
-axios.get(`http://localhost:5005/profile/patient/${patientId}`)
+axios.get(config.apiUrl + `/profile/patient/${patientId}`)
 .then((res)=>{
   console.log(res.data)
   setPatientInfo(res.data)

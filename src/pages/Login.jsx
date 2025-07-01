@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import {jwtDecode} from 'jwt-decode';
+import {config} from "../../config.js";
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -16,7 +17,7 @@ function Login() {
     event.preventDefault();
       const userToLogin = {email, password};
     try {
-      const res = await axios.post("http://localhost:5005/auth/login", userToLogin);
+      const res = await axios.post(config.apiUrl + "/auth/login", userToLogin);
       localStorage.setItem("authToken", res.data.authToken);
       const decode = jwtDecode(res.data.authToken);
       console.log(decode)

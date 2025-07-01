@@ -4,6 +4,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../context/AuthContext';
+import {config} from "../../config.js";
 
 
 function TimeSlot({availabilities, setAvailabilities}) {
@@ -16,7 +17,7 @@ function TimeSlot({availabilities, setAvailabilities}) {
         event.preventDefault();
         const token = localStorage.getItem("authToken");
         try {
-            const res = await axios.post("http://localhost:5005/timeslot/availability", {
+            const res = await axios.post(config.apiUrl + "/timeslot/availability", {
                 date: date.toISOString().split('T')[0],
                 start, 
                 end
