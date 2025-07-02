@@ -19,7 +19,7 @@ function CreatePatientProfile() {
       dateOfBirth:dateOfBirth,
       history:history
     })
-    console.log("doctor created", patientInfo.data)
+    console.log("patient created", patientInfo.data)
     nav("/login")
   } catch (error) {
     console.log(error)
