@@ -30,12 +30,8 @@ useEffect(()=>{
 
 // check this part
 useEffect(()=>{
-  const token = localStorage.getItem("authToken")
-  axios.get(config.apiUrl + `/timeslot/availability/${doctorId}`,{
-    headers:{
-      Authorization:`Bearer ${token}`
-    }
-  })
+  // const token = localStorage.getItem("authToken")
+  axios.get(config.apiUrl + `/timeslot/availability/${doctorId}`)
   .then((res)=>{
     console.log(res.data)
     console.log(doctorId)

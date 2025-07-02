@@ -34,7 +34,7 @@ async function handleReserve(timeslotId) {
     const token = localStorage.getItem('authToken');
     const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`, {
       headers:{
-        Authorization: `Beare ${token}`
+        Authorization: `Bearer ${token}`
       }
     
     })
