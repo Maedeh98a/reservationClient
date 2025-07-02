@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import CreatePatientProfile from './CreatePatientProfile';
 import {config} from "../../config.js";
 import PatientUpdate from './PatientUpdate.jsx';
 

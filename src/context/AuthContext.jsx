@@ -37,10 +37,10 @@ const AuthContextWrapper = ({children})=>{
             setIsLoading(false);
             setIsLoggedIn(true);
 
-            if(payload.role === "doctor"){
+            if(payload.role == "doctor"){
                 setDoctorId(payload.doctorId);
             }
-            if(payload.role === "patient"){
+            if(payload.role == "patient"){
                 setPatientId(payload.patientId);
             }
         } catch (error) {

@@ -6,7 +6,7 @@ import {config} from "../../config.js";
 function DoctorDetails() {
 const {doctorId} = useParams();
 const [doctor, setDoctor] = useState({});
-
+const [availabilities, setAvailabilities] = useState();
 useEffect(()=>{
   axios.get(config.apiUrl + `/profile/doctor/${doctorId}`)
   .then((res)=>{
@@ -17,11 +17,73 @@ useEffect(()=>{
   })
 
 },[doctorId])
+ 
+useEffect(()=>{
+  axios.get(config.apiUrl + `/timeslot/availability/${doctorId}`)
+  .then((res)=>{
+    console.log(res.data)
+    setAvailabilities(res.data)
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+},[doctorId])
+
+async function handleReserve(timeslotId) {
+  try {
+    const token = localStorage.getItem('authToken');
+    const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`, {
+      headers:{
+        Authorization: `Beare ${token}`
+      }
+    
+    })
+    console.log(res.data);
+    
+  } catch (error) {
+    console.log(error);
+  }
   
+}
+
   return (
-    <div>
+    <>
        <h2>{doctor.specialty}</h2> 
-    </div>
+
+       {availabilities.map((item) => (
+    <div key={item._id} className='timeslot-table'>
+      <table>
+        <thead>
+          <tr>
+          <th>date</th>
+        <th>weekday</th>
+        <th>time</th>
+        <th>booked</th>
+        <th>reserve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                    <td>
+        {new Date(item.date).toLocaleDateString()}
+        </td>
+        <td>
+     {new Date(item.date).toLocaleDateString('en-US', {weekday: 'long'})}
+        </td>
+        <td>
+        <p>{item.start} - {item.end}</p>
+        </td>
+        <td>{item.isBooked?"yes":"no"}</td>
+        <td>
+          <button onClick={()=> handleReserve(item._id)}>reserve</button>        
+        </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    )
+    )}
+    </>
   )
 
 }
