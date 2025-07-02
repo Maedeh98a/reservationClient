@@ -25,7 +25,17 @@ useEffect(()=>{
 
 },[currentUser._id])
 
+ useEffect(()=>{
+  axios.get(config.apiUrl + `/profile/doctor/${patientId}`)
+  .then((res)=>{
+    setPatientInfo(res.data)
+   
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
 
+},[patientId])
 
 function handleDelete(){
 const token = localStorage.getItem('authToken')
