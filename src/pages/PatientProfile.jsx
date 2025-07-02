@@ -29,7 +29,7 @@ useEffect(()=>{
 
 function handleDelete(){
 const token = localStorage.getItem('authToken')
-  axios.delete(config.apiUrl + `profile/deletePatient`, {headers:
+  axios.delete(config.apiUrl + `/profile/deletePatient`, {headers:
     {
       Authorization: `Bearer ${token}`
     }

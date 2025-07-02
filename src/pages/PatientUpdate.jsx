@@ -57,6 +57,7 @@ function PatientUpdate({setPatientInfo}) {
     <label>description
       <textarea value={userUpdates.description} rows={3} onChange={(e) => setUserUpdates({...userUpdates, description: e.target.value})}/>
     </label>
+    <button type='submit'>update</button>
 
     </form>
     </>
