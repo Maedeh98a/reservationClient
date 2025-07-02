@@ -26,7 +26,7 @@ useEffect(()=>{
 },[currentUser._id])
 
  useEffect(()=>{
-  axios.get(config.apiUrl + `/profile/doctor/${patientId}`)
+  axios.get(config.apiUrl + `/profile/patient/${patientId}`)
   .then((res)=>{
     setPatientInfo(res.data)
    
