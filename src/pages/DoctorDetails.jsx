@@ -6,7 +6,7 @@ import {config} from "../../config.js";
 function DoctorDetails() {
 const {doctorId} = useParams();
 const [doctor, setDoctor] = useState({});
-const [availabilities, setAvailabilities] = useState();
+const [availabilities, setAvailabilities] = useState([]);
 useEffect(()=>{
   axios.get(config.apiUrl + `/profile/doctor/${doctorId}`)
   .then((res)=>{
