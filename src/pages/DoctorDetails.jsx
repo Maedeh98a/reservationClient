@@ -31,13 +31,11 @@ useEffect(()=>{
 
 async function handleReserve(timeslotId) {
   try {
-    const token = await localStorage.getItem('authToken');
-    const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`, {
-      headers:{
-        Authorization: `Bearer ${token}`
-      }
-    
-    })
+    const token = localStorage.getItem('authToken');
+    const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`, {headers:{
+    Authorization: `Bearer ${token}`
+
+  }})
     console.log(res.data);
     
   } catch (error) {
