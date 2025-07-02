@@ -1,36 +1,33 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
-import { AuthContext } from '../context/AuthContext';
 import {config} from "../../config.js";
+import { useNavigate, useParams } from 'react-router-dom';
 
-function CreatePatientProfile({setPatientInfo}) {
-    const {currentUser} = useContext(AuthContext);
+function CreatePatientProfile() {
+
     const [dateOfBirth, setDateOfBirth] = useState("1900-01-01");
     const[history, setHistory] = useState([]);
- async function doctorInfoHandle(event) {
+    const {userId} = useParams();
+    const nav = useNavigate();
+
+ async function patientInfoHandle(event) {
   event.preventDefault();
   try {
-    const token = localStorage.getItem('authToken');
-    console.log(token)
-    const patientInfo = await axios.post(config.apiUrl + "/profile/createPatient", {
-      user: currentUser._id,
+  
+    const patientInfo = await axios.post(config.apiUrl + `/profile/createPatient/${userId}`, {
+     
       dateOfBirth:dateOfBirth,
       history:history
-    },
-    {
-      headers:{
-        Authorization: `Bearer ${token}`
-      } 
     })
     console.log("doctor created", patientInfo.data)
-    setPatientInfo(patientInfo);
+    nav("/login")
   } catch (error) {
     console.log(error)
   }
 }
   return (
     <>
-     <form onSubmit={doctorInfoHandle}>
+     <form onSubmit={patientInfoHandle}>
       <label>dateOfBirth
         <input type="date" onChange={(event)=>{setDateOfBirth(event.target.value)}} />
       </label>

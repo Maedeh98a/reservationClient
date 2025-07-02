@@ -8,7 +8,7 @@ import CreatePatientProfile from './CreatePatientProfile';
 import {config} from "../../config.js";
 
 function PatientProfile() {
-  const {currentUser, setCurrentUser,handleLogout, patientId } = useContext(AuthContext);
+  const {currentUser, setCurrentUser, patientId } = useContext(AuthContext);
   const [patientInfo, setPatientInfo] = useState(null);
 console.log(currentUser)
 
@@ -24,8 +24,8 @@ useEffect(()=>{
 
 },[currentUser._id])
 
-function getPatientInfo(patientId){
-axios.get(config.apiUrl + `/profile/patient/${patientId}`)
+useEffect(()=>{
+  axios.get(config.apiUrl + `/profile/patient/${patientId}`)
 .then((res)=>{
   console.log(res.data)
   setPatientInfo(res.data)
@@ -34,19 +34,16 @@ axios.get(config.apiUrl + `/profile/patient/${patientId}`)
 .catch((error)=>{
   console.log(error);
 })
-}
+},[patientId])
+
+
   return (
     <>
     <div className='patient-profile'>
     <div>
       <h1>{currentUser.firstName} {currentUser.lastName}</h1>
     </div>
-    {patientInfo? (
-      <div>
-        {patientInfo.history}</div>
-    ): <CreatePatientProfile setPatientInfo={setPatientInfo}/>}
-    
-      <button onClick={handleLogout}>Logout</button>
+
     </div>
     </>
     

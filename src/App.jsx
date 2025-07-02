@@ -11,6 +11,8 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import DoctorList from './pages/DoctorList'
 import DoctorDetails from './pages/DoctorDetails'
+import CreateDoctorProfile from './pages/CreateDoctorProfile'
+import CreatePatientProfile from './pages/CreatePatientProfile'
 function App() {
  
 
@@ -20,6 +22,8 @@ function App() {
     <Navbar/>
      <Routes>
       <Route path="/" element={<Signup/>}/>
+      <Route path="/createDoctor/:userId" element={<CreateDoctorProfile/>}/>
+      <Route path="/createPatient/:userId" element={<CreatePatientProfile/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/doctors' element={<DoctorList/>}/>
       <Route path = '/doctors/:doctorId' element= {<DoctorDetails/>}/>

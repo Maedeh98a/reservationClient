@@ -18,9 +18,9 @@ function Login() {
       
     try {
       const userToLogin = {email, password};
-      const res = await axios.post(`https://reservationserver-g0sr.onrender.com/auth/login`, userToLogin)
+      // const res = await axios.post(`https://reservationserver-g0sr.onrender.com/auth/login`, userToLogin)
       console.log("Api url",config.apiUrl)
-      // const res = await axios.post(config.apiUrl + "/auth/login", userToLogin);
+      const res = await axios.post(config.apiUrl + "/auth/login", userToLogin);
       localStorage.setItem("authToken", res.data.authToken);
       const decode = jwtDecode(res.data.authToken);
       console.log(decode)

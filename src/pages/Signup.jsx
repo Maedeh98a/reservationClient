@@ -18,7 +18,19 @@ function Signup() {
     axios.post(config.apiUrl + '/auth/signup', userToCreate)
       .then((res) => {
         console.log('user successfully created', res.data)
-        nav("/login")
+        return res.data
+      
+      })
+      .then((data)=>{
+        const role = data.role;
+        if (role == "doctor"){
+          nav(`/createDoctor/${data._id}`);
+
+        }
+        else if(role == "patient"){
+          nav(`/createPatient/${data._id}`)
+
+        }
       })
       .catch((error) => {
         console.log(error)

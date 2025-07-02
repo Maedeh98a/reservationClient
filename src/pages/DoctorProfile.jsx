@@ -11,7 +11,7 @@ import UpdateTimeSlot from '../components/UpdateTimeSlot';
 import {config} from "../../config.js";
 
 function DoctorProfile() {
-  const {currentUser, setCurrentUser,handleLogout, doctorId, authenticateUser} = useContext(AuthContext);
+  const {currentUser, setCurrentUser, doctorId} = useContext(AuthContext);
   const [doctorInfo, setDoctorInfo] = useState([]);
   const [availabilities, setAvailabilities] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -47,8 +47,8 @@ useEffect(()=>{
 },[doctorId])
 
 
-  function getDoctorProfile(doctorId){
-    useEffect(()=>{
+
+  useEffect(()=>{
   axios.get(config.apiUrl + `/profile/doctor/${doctorId}`)
   .then((res)=>{
     setDoctorInfo(res.data)
@@ -59,8 +59,7 @@ useEffect(()=>{
   })
 
 },[doctorId])
-  }
-
+  
 function handleDelete(itemId){
   const token = localStorage.getItem('authToken')
   axios.delete(config.apiUrl + `/timeslot/deleteTimeslot/${itemId}`, {headers:{
@@ -83,7 +82,7 @@ function handleDelete(itemId){
   <article className='doctor-style'>
 
     <div>
-      {doctorId != undefined ? getDoctorProfile(doctorId) : <CreateDoctorProfile  setDoctorInfo={setDoctorInfo} authenticateUser={authenticateUser}/>}
+  
     <h2>Mr {currentUser.firstName} {currentUser.lastName}</h2>
     <h4>email : {currentUser.email}</h4>
     <h4>specialty: {doctorInfo.specialty}</h4>
