@@ -141,6 +141,7 @@ border:1px solid plum;
 margin: 2px;
 padding: 4px;
 border-radius: 10px;
+overflow: scroll;
 }
 #delete-btn{
     color: red;
