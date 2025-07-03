@@ -9,7 +9,7 @@ import PatientUpdate from './PatientUpdate.jsx';
 
 function PatientProfile() {
   const {currentUser, setCurrentUser, patientId } = useContext(AuthContext);
-  const [patientInfo, setPatientInfo] = useState(null);
+  const [patientInfo, setPatientInfo] = useState({});
   const nav = useNavigate();
 
 useEffect(()=>{
@@ -36,6 +36,7 @@ useEffect(()=>{
 
 },[patientId])
 
+console.log(patientInfo)
 function handleDelete(){
 const token = localStorage.getItem('authToken')
   axios.delete(config.apiUrl + "/profile/deletePatient", {headers:
