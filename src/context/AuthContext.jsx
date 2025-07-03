@@ -52,6 +52,9 @@ const AuthContextWrapper = ({children})=>{
     }
     function handleLogout(){
         localStorage.removeItem('authToken');
+        setCurrentUser(null);
+        setIsLoading(false);
+        setIsLoggedIn(false);  
         nav('/login');
     }
     useEffect(()=>{
