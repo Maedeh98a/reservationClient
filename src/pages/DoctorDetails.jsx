@@ -29,8 +29,10 @@ useEffect(()=>{
   })
 },[doctorId])
 
-async function handleReserve(timeslotId) {
-  try {
+
+  useEffect(() =>{
+    async function handleReserve(timeslotId) {
+    try {
     const token = localStorage.getItem('authToken');
     console.log(token);
     const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`, {headers:{
@@ -42,8 +44,11 @@ async function handleReserve(timeslotId) {
   } catch (error) {
     console.log(error);
   }
-  
 }
+handleReserve(timeslotId);
+  },[timeslotId])
+  
+
 
   return (
     <>
