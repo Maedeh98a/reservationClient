@@ -1,6 +1,6 @@
 import React from 'react'
 import github from '../assets/github.png'
-import linkdin1 from '../assets/linkdin1.png'
+import linkdin1 from '../assets/linkedin1.png'
 import { Link } from 'react-router-dom'
 
 function Footer() {
