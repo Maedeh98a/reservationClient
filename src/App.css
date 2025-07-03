@@ -1,6 +1,15 @@
 
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+*{
+    font-family: "Poppins", sans-serif;;
+}
 body{
-    margin: 0px;
+    margin: 0;
+    padding: 0;
 }
 nav{
     width: 100vw;
@@ -33,7 +42,14 @@ footer{
     width: 100vw;
     height: 10vh;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
     
+}
+footer img{
+    width: 30px;
+    height: 30px;
 }
 .signup-style{
     background-color: thistle;

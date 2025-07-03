@@ -14,23 +14,18 @@ function Navbar() {
             <Link to="/doctors">Doctors</Link>
             <Link>About us</Link>
       </section>
+
+
        <section className='user-nav'>
-        {isLoggedIn ? (currentUser.role == "doctor"? (
-            <>
-            <Link to="/doctorProfile">My profile</Link>
-         <button onClick={handleLogout}>Logout</button>
+        {isLoggedIn && currentUser.role == "docotor" ?
+        ( <Link to="/doctorProfile">My profile</Link>) 
+        : (<Link to="/login">Login</Link>)}
+
+
+        {isLoggedIn && currentUser.role == "patient" ?
+        ( <Link to="/patientProfile">My profile</Link>) 
+        : (<Link to="/login">Login</Link>)}
             
-            </>
-         ) : (
-         <>
-         <Link to="/patientProfile">my Profile</Link>
-         <button onClick={handleLogout}>Logout</button>
-         </>
-         ))
-         :(
-            <Link to="/login">Login</Link>
-         )}
-       
             
            
       </section>
