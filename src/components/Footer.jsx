@@ -9,7 +9,7 @@ function Footer() {
       <Link to="https://github.com/Maedeh98a">
       <img src={github} alt='github'/>
       </Link>
-      <Link to="linkedin.com/in/maedeh-ahmadian">
+      <Link to="https://www.linkedin.com/in/maedeh-ahmadian">
       <img src={linkdin1} alt='linkedin'/>
       </Link>
     </footer>
