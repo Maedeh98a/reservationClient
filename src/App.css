@@ -75,11 +75,25 @@ footer{
     padding: 30px;
 }
 .patient-profile{
+    display: flex;
+    align-items: center;
     background-color: peachpuff;
     width: 80vw;
     margin: 10px auto;
     padding: 10px;
     height: 80vh;
+}
+.patient-info{
+display: flex;
+flex-direction: column;
+background-color: #9c1d76;
+width: 50vw;
+}
+.patient-edit{
+display: flex;
+flex-direction: column;
+background-color: antiquewhite;
+width: 50vw;
 }
 .doctor-profile{
     background-color: pink;

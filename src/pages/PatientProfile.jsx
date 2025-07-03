@@ -54,14 +54,26 @@ const token = localStorage.getItem('authToken')
 }
   return (
     <>
-    <div className='patient-profile'>
-    <div>
-      <h1>{currentUser.firstName} {currentUser.lastName}</h1>
-    </div>
+    <section className='patient-profile'>
+      <article className='patient-info'>
+        <h1>You can see your data here: </h1>
+        <h2>Name: {currentUser.firstName} {currentUser.lastName}</h2>
+        <h3>E-mail: {currentUser.email}</h3>
+        <h3>Birthday: {patientInfo.dateOfBirth}</h3>
+        <h4>Your history: {patientInfo.history}</h4>
+        <h4>Your reservation: {patientInfo.reservation.doctor}</h4>
+        <p>{currentUser.description}</p>
+        
+      </article>
 
-    </div>
+    <article className='patient-edit'>  
+    <p>You can update your information here!</p>
     <PatientUpdate setPatientInfo={setPatientInfo}/>
+    <p>Do you want to delete your account?</p>
     <button onClick={handleDelete}> delete</button>
+    </article>
+    </section>
+    
     </>
     
   )
