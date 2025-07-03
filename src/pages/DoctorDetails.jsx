@@ -35,7 +35,7 @@ useEffect(() =>{
     try {
     const token = localStorage.getItem('authToken');
     console.log(token);
-    const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`, {headers:{
+    const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`,{}, {headers:{
     Authorization: `Bearer ${token}`
 
   }})
