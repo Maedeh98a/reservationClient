@@ -1,8 +1,10 @@
 
+
 .poppins-medium {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+  
 }
 *{
     font-family: "Poppins", sans-serif;;
@@ -41,11 +43,13 @@ footer{
     background-color: thistle;
     width: 100vw;
     height: 10vh;
+    
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 10px;
     margin: auto 0 0 0;
+    
 }
 footer img{
     width: 30px;
@@ -218,24 +222,50 @@ th {
     overflow: scroll;
 }
 .doctorlist{
+    display: flex;
+    justify-content: space-around;
     border: 1px solid rgb(196, 116, 196);
-    margin: 10px;
+    width: 70vw;
+    margin: 20px auto;
     padding: 10px;
 }
+#doctor-availability{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.doctor-availabilities{
+width: 80vw;
+height: 60vw;
+margin: 10px auto;
 
+}
 .creat-doctor-form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    background-color: #9d7c9a;
+    height: 70vh;
+    background-color: #d9bed7;
     width: 60vw;
     margin: 10px auto;
     padding: 10px;
 }
+.create-patient-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #d9bed7;
+    width: 60vw;
+    height: 70vh;
+    margin: 10px auto;
+    padding: 10px;
+
+}
 #create-doctor-btn{
-    width: 50px;
-    height: 20px;
+    width: 150px;
+    height: 40px;
     background-color: #601d5a;
     color: white;
 }

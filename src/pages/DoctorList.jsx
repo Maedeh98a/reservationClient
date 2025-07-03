@@ -17,19 +17,28 @@ function DoctorList() {
 },[])
   return (
     <>
-    <div>
+    <section>
       {doctors.map((doctor)=>{
         return(
+          <>
           <div key={doctor._id} className='doctorlist'>
-            <Link to={`/doctors/${doctor._id}`}>{doctor.user.firstName} {doctor.user.lastName}</Link>
-            <h2>{doctor.specialty}</h2>
-            <h3>{doctor.startedYear}</h3>
+            <article>
+            <h2>Doctor's name: {doctor.user.firstName} {doctor.user.lastName}</h2>
+            <h3>Doctor's specialty: {doctor.specialty}</h3>
+            <h4>He started his work at {doctor.startedYear}</h4>
+            </article>
             
+             <article id="doctor-availability">
+              <p>Doctor's description: {doctor.user.description}</p>
+           <Link to={`/doctors/${doctor._id}`}>You can check the doctor's availabilities here</Link>
+          </article>
 
           </div>
+         
+        </>
         )
       })}
-    </div>
+    </section>
     </>
   )
 }

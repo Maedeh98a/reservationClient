@@ -10,6 +10,7 @@ const [availabilities, setAvailabilities] = useState([]);
 useEffect(()=>{
   axios.get(config.apiUrl + `/profile/doctor/${doctorId}`)
   .then((res)=>{
+    console.log(res.data)
    setDoctor(res.data);
   })
   .catch((error)=>{
@@ -29,6 +30,8 @@ useEffect(()=>{
   })
 },[doctorId])
 
+
+
 function handleReserve(timeslotId){
   
     const token = localStorage.getItem('authToken');
@@ -40,23 +43,19 @@ function handleReserve(timeslotId){
   .then((res)=>{
     console.log(res.data);
 
-  })
-    
-    
+  })  
   .catch ((error)=>{
     console.log(error);
-
   }) 
     
 }
 
-
-
   return (
     <>
-       <h2>{doctor.specialty}</h2> 
-
-       {availabilities.map((item) => (
+    <section className='doctor-availabilities'>
+      {availabilities.length == 0 ? "Doctor hasn't set his availabilities yet": "doctor's availabilies"}
+     
+         {availabilities.map((item) => (
     <div key={item._id} className='timeslot-table'>
       <table>
         <thead>
@@ -89,6 +88,11 @@ function handleReserve(timeslotId){
       </div>
     )
     )}
+
+     
+    </section>
+      
+      
     </>
   )
 
