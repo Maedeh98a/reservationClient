@@ -45,7 +45,7 @@ footer{
     align-items: center;
     justify-content: space-around;
     padding: 10px;
-    
+    margin: auto 0 0 0;
 }
 footer img{
     width: 30px;
@@ -75,7 +75,7 @@ footer img{
 #timeslot-btn{
     border: 1px solid transparent;
     border-radius: 10px;
-    width: 100px;
+    width: 120px;
     height: 30px;
     margin: 10px auto;
 }
@@ -221,4 +221,21 @@ th {
     border: 1px solid rgb(196, 116, 196);
     margin: 10px;
     padding: 10px;
+}
+
+.creat-doctor-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #9d7c9a;
+    width: 60vw;
+    margin: 10px auto;
+    padding: 10px;
+}
+#create-doctor-btn{
+    width: 50px;
+    height: 20px;
+    background-color: #601d5a;
+    color: white;
 }

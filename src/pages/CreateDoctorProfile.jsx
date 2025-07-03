@@ -32,7 +32,7 @@ async function doctorInfoHandle(event) {
 }
   return (
     <>
-     <form onSubmit={doctorInfoHandle}>
+     <form onSubmit={doctorInfoHandle} className='creat-doctor-form'>
       <label>Specialty
         <select
         id="specialty"
@@ -92,7 +92,7 @@ async function doctorInfoHandle(event) {
         <input type="number" onChange={(event)=>{setStartedYear(event.target.value)}}/>
       </label>
       
-      <button>submit</button>
+      <button id='create-doctor-btn'>Create Profile</button>
     </form>
 
     </>
