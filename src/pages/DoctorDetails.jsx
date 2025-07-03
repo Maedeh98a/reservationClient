@@ -30,7 +30,7 @@ useEffect(()=>{
 },[doctorId])
 
 
-  useEffect(() =>{
+useEffect(() =>{
     async function handleReserve(timeslotId) {
     try {
     const token = localStorage.getItem('authToken');
@@ -46,7 +46,7 @@ useEffect(()=>{
   }
 }
 handleReserve(timeslotId);
-  },[timeslotId])
+  },[])
   
 
 
