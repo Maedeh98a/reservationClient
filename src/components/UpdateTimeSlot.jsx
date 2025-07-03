@@ -21,20 +21,22 @@ function UpdateTimeSlot({timeslot, setAvailabilities}) {
         }})
         .then((res)=>{
             console.log(res);
-            nav("/doctorProfile");
+            
             setAvailabilities(prev =>
         prev.map(slot =>
           slot._id === timeslot._id ? res.data : slot
         )
       );
+      nav("/doctorProfile");
         })
+        
         .catch((error)=>{
             console.log(error);
         })
     }
   return (
     <>
-    <form onSubmit={handleUpdate}>
+    <form onSubmit={handleUpdate} className='form-style'>
         <label> Date: 
             <DatePicker selected={date} onChange={(newDate)=> setDate(newDate)} dateFormat="yyyy-MM-dd"/>
         </label>
@@ -44,7 +46,7 @@ function UpdateTimeSlot({timeslot, setAvailabilities}) {
         <label> end
             <input type='time' value={end} onChange={(e)=> setEnd(e.target.value)}/>
         </label>
-        <button type='submit'>Update</button>
+        <button id="timeslot-edit-btn" type='submit'>Change</button>
     </form>
     </>
   )

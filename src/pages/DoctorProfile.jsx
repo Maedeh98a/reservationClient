@@ -78,14 +78,13 @@ function handleDelete(itemId){
   <article className='doctor-style'>
 
     <div>
-  
-    <h2>Mr {currentUser.firstName} {currentUser.lastName}</h2>
-    <h4>email : {currentUser.email}</h4>
-    <h4>specialty: {doctorInfo.specialty}</h4>
-    <h4>started Year: {doctorInfo.startedYear}</h4>
-    <p>description: {currentUser.description}</p>
-   
-      </div>
+    <h2>Dr {currentUser.firstName} {currentUser.lastName}</h2>
+    <h4>E-mail : {currentUser.email}</h4>
+    <h4>Specialty: {doctorInfo.specialty}</h4>
+    <h4>Started Year: {doctorInfo.startedYear}</h4>
+    <h4>Address: {doctorInfo.address}</h4>
+    <p>Description: {currentUser.description}</p>
+    </div>
       <div>
         <h4>You can change your profile here:</h4>
         
