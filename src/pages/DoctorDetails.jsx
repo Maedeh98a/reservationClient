@@ -29,25 +29,27 @@ useEffect(()=>{
   })
 },[doctorId])
 
-
-useEffect(() =>{
-    async function handleReserve(timeslotId) {
-    try {
+function handleReserve(timeslotId){
+  
     const token = localStorage.getItem('authToken');
-    console.log(token);
-    const res = await axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`,{}, {headers:{
+    
+    axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`,{}, {headers:{
     Authorization: `Bearer ${token}`
 
   }})
+  .then((res)=>{
     console.log(res.data);
+
+  })
     
-  } catch (error) {
+    
+  .catch ((error)=>{
     console.log(error);
-  }
+
+  }) 
+    
 }
-handleReserve(timeslotId);
-  },[])
-  
+
 
 
   return (
