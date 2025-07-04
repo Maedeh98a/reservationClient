@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import {config} from "../../config.js";
 import { AuthContext } from '../context/AuthContext.jsx';
 
-function UpdateDoctorProfile({setDoctorInfo}) {
+function UpdateDoctorProfile({doctorInfo, setDoctorInfo}) {
     const nav = useNavigate();
-    const {setCurrentUser} = useContext(AuthContext);
-    const [specialty, setSpecialty] = useState('GP');
-    const [address, setAddress] = useState("")
-    const [startedYear, setStartedYear] = useState(1900);
+    const {currentUser, setCurrentUser} = useContext(AuthContext);
+    const [specialty, setSpecialty] = useState(doctorInfo.specialty);
+    const [address, setAddress] = useState(doctorInfo.address)
+    const [startedYear, setStartedYear] = useState(doctorInfo.startedYear);
     const [userUpdates, setUserUpdates] = useState({
-        firstName: '',
-        lastName: '',
-        description: ''
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        description: currentUser.description
       })
   
 
@@ -23,10 +23,6 @@ function handleUpdate(event){
     event.preventDefault();
 
     const token = localStorage.getItem('authToken');
-    // const updatedDoctor = {
-    //     specialty: specialty,
-    //     startedYear: startedYear
-    // }
     
         axios.put(config.apiUrl + "/profile/updateDoctor", {
             specialty, 

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import {jwtDecode} from 'jwt-decode';
 import {config} from "../../config.js";
+import { toast, ToastContainer } from 'react-toastify';
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -25,7 +26,7 @@ function Login() {
       const decode = jwtDecode(res.data.authToken);
       console.log(decode)
       await authenticateUser();
-      
+      toast.success("Login successful!");
       if(decode.role == 'doctor'){
        // setDoctorId(decode.doctorId)
         nav(`/doctorProfile`);
@@ -38,7 +39,11 @@ function Login() {
       // I have to figure out for user profile is it doctor or patient
     
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      if (error.response?.data?.errorMessage) {
+      toast.error(error.response.data.errorMessage); 
+      toast.error("Login failed. Please try again."); 
+    }
     }
     
    

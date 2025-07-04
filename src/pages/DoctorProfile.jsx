@@ -58,6 +58,7 @@ useEffect(()=>{
   
 function handleDelete(itemId){
   console.log("Trying to delete item with ID:", itemId); 
+  
   const token = localStorage.getItem('authToken')
   axios.delete(config.apiUrl + `/timeslot/deleteTimeslot/${itemId}`, {headers:{
     Authorization: `Bearer ${token}`
@@ -89,7 +90,7 @@ function handleDelete(itemId){
       <div>
         <h4>You can change your profile here:</h4>
         
-          <UpdateDoctorProfile setDoctorInfo={setDoctorInfo}/>
+          <UpdateDoctorProfile doctorInfo={doctorInfo} setDoctorInfo={setDoctorInfo}/>
       </div>
         
      
