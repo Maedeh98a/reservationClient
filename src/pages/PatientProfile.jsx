@@ -62,14 +62,14 @@ const token = localStorage.getItem('authToken')
         <h3>E-mail: {currentUser.email}</h3>
         <h3>Birthday: {patientInfo.dateOfBirth}</h3>
         <h4>Your history: {patientInfo.history}</h4>
-        {/* <h4>Your reservation: {patientInfo.reservation.doctor}</h4> */}
+        <h4>Your reservation: {patientInfo.reservation.doctor}</h4>
         <p>{currentUser.description}</p>
         
       </article>
 
     <article className='patient-edit'>  
     <p>You can update your information here!</p>
-    <PatientUpdate setPatientInfo={setPatientInfo}/>
+    <PatientUpdate patientInfo={patientInfo} setPatientInfo={setPatientInfo}/>
     <p>Do you want to delete your account?</p>
     <button onClick={handleDelete}> delete</button>
     </article>
