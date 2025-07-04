@@ -1,16 +1,18 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {config} from "../../config.js";
+import { toast, ToastContainer } from 'react-toastify';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 function DoctorDetails() {
 const {doctorId} = useParams();
+const {isLoggedIn} = useContext(AuthContext)
 const [doctor, setDoctor] = useState({});
 const [availabilities, setAvailabilities] = useState([]);
 useEffect(()=>{
   axios.get(config.apiUrl + `/profile/doctor/${doctorId}`)
   .then((res)=>{
-    console.log(res.data)
    setDoctor(res.data);
   })
   .catch((error)=>{
@@ -22,7 +24,6 @@ useEffect(()=>{
 useEffect(()=>{
   axios.get(config.apiUrl + `/timeslot/availability/${doctorId}`)
   .then((res)=>{
-    console.log(res.data)
     setAvailabilities(res.data)
   })
   .catch((err)=>{
@@ -33,7 +34,10 @@ useEffect(()=>{
 
 
 function handleReserve(timeslotId){
-  
+    if(!isLoggedIn){
+      toast.warn("You have to login first");
+      return;
+    }
     const token = localStorage.getItem('authToken');
     
     axios.post(config.apiUrl + `/timeslot/${timeslotId}/reserve`,{}, {headers:{
@@ -42,10 +46,12 @@ function handleReserve(timeslotId){
   }})
   .then((res)=>{
     console.log(res.data);
+     toast.success("Reservation successful!");
 
   })  
   .catch ((error)=>{
     console.log(error);
+    toast.error("Something went wrong with the reservation.");
   }) 
     
 }
