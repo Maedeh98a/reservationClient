@@ -3,14 +3,14 @@ import React, { useContext, useState } from 'react'
 import { config } from '../../config';
 import { AuthContext } from '../context/AuthContext';
 
-function PatientUpdate({setPatientInfo}) {
-  const {setCurrentUser} = useContext(AuthContext);
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [history, setHistory] = useState([]);
+function PatientUpdate({patientInfo, setPatientInfo}) {
+  const {currentUser, setCurrentUser} = useContext(AuthContext);
+  const [dateOfBirth, setDateOfBirth] = useState(patientInfo.dateOfBirth);
+  const [history, setHistory] = useState(patientInfo.history);
   const [userUpdates, setUserUpdates] = useState({
-    firstName: '',
-    lastName: '',
-    description: ''
+    firstName: currentUser.firstName,
+    lastName: currentUser.lastName,
+    description: currentUser.description
   })
 
   function handlePatientUpdate(event){
@@ -41,7 +41,7 @@ function PatientUpdate({setPatientInfo}) {
   }
   return (
     <>
-    <form onSubmit={handlePatientUpdate}>
+    <form onSubmit={handlePatientUpdate} className='form-style'>
     <label> Date of birth
       <input type='date' value={dateOfBirth} onChange={(event)=>setDateOfBirth(event.target.value)}/>
     </label>
