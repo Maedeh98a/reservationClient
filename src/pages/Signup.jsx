@@ -73,9 +73,8 @@ function Signup() {
           </select>
         </label>
         <button className='btn'>Sign up</button>
-        <p>you already have an account, so you can Login
-          <Link to="/login">login</Link>
-        </p>
+        <p>you already have an account, so you can Login:</p>
+         <p> <Link to="/login">login</Link></p>
       </form>
     </>
   )

@@ -10,7 +10,7 @@ function Navbar() {
     <>
     <nav>
       <section className='common-nav'>
-        <img id='logo-img' src={reserve} alt='logo'/>
+      <Link to="/"><img id='logo-img' src={reserve} alt='logo'/></Link>
             <Link to="/doctors">Doctors</Link>
             <Link>About us</Link>
       </section>

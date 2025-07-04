@@ -62,7 +62,7 @@ const token = localStorage.getItem('authToken')
         <h3>E-mail: {currentUser.email}</h3>
         <h3>Birthday: {patientInfo.dateOfBirth}</h3>
         <h4>Your history: {patientInfo.history}</h4>
-        <p>{currentUser.description}</p>
+        <p>Description: {currentUser.description}</p>
         
       </article>
 

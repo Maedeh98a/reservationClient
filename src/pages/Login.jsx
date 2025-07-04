@@ -59,9 +59,11 @@ function Login() {
           <input type='password' value={password} onChange={(event)=>setPassword(event.target.value)}/>
         </label>
         <button className="btn">Login</button>
-        <p>You don't have account, so at first create new account
+        <p>You don't have account, so at first create new account:</p>
+        <p>
           <Link to="/">signup</Link>
         </p>
+          
       </form>
     </div>
   )
