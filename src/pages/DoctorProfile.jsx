@@ -57,6 +57,7 @@ useEffect(()=>{
 },[doctorId])
   
 function handleDelete(itemId){
+  console.log("Trying to delete item with ID:", itemId); 
   const token = localStorage.getItem('authToken')
   axios.delete(config.apiUrl + `/timeslot/deleteTimeslot/${itemId}`, {headers:{
     Authorization: `Bearer ${token}`

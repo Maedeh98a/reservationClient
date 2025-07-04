@@ -16,7 +16,7 @@ function DoctorList() {
     })
 },[])
   return (
-    <>
+    
     <section>
       {doctors.map((doctor)=>{
         return(
@@ -39,7 +39,7 @@ function DoctorList() {
         )
       })}
     </section>
-    </>
+    
   )
 }
 
