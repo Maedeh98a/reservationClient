@@ -4,6 +4,27 @@ import { config } from '../../config';
 import { AuthContext } from '../context/AuthContext';
 
 function PatientUpdate({patientInfo, setPatientInfo}) {
+  const diseaseOptions = [
+                  "Cancer",
+                  "Diabetes",
+                  "Hypertension (High Blood Pressure)",
+                  "Heart Disease",
+                  "Asthma",
+                  "Chronic Obstructive Pulmonary Disease (COPD)",
+                  "Stroke",
+                  "Alzheimer’s Disease",
+                  "Parkinson’s Disease",
+                  "Depression",
+                  "Anxiety Disorder",
+                  "Arthritis",
+                  "Obesity",
+                  "Chronic Kidney Disease",
+                  "Liver Disease",
+                  "HIV/AIDS",
+                  "COVID-19",
+                  "Influenza (Flu)",
+                  "Tuberculosis",
+                ];
   const {currentUser, setCurrentUser} = useContext(AuthContext);
   const [dateOfBirth, setDateOfBirth] = useState(patientInfo.dateOfBirth);
   const [history, setHistory] = useState(patientInfo.history);
@@ -46,7 +67,14 @@ function PatientUpdate({patientInfo, setPatientInfo}) {
       <input type='date' value={dateOfBirth} onChange={(event)=>setDateOfBirth(event.target.value)}/>
     </label>
     <label> your illness history
-      <input type='text' value={history} onChange={(event)=>setHistory(event.target.value)}/>
+     <select value={history} onChange={(event)=>{setHistory(event.target.value)}}>
+      <option value="">--Please choose one--</option>
+      {diseaseOptions.map((disease, index) =>(
+        <option key={index} value={disease}>
+          {disease}
+        </option>
+      ))}
+    </select>
     </label>
     <label>First Name
       <input type='text' value={userUpdates.firstName} onChange={(e) => setUserUpdates({...userUpdates, firstName: e.target.value})}/>
